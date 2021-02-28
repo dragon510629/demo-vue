@@ -3,9 +3,9 @@
     <div class="logo">
       <img src="../assets/image/lisa.jpg" alt="">
     </div>
-    <FilterShop></FilterShop>
-    <Products></Products>
-    <Phone></Phone>
+    <FilterShop :filter = "filter"></FilterShop>
+    <Products :filter = "filter"></Products>
+    <Phone :filter="filter"></Phone>
   </div>
 </template>
 
@@ -18,7 +18,12 @@ export default {
   name: 'Shop',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      filter: {
+        name: '',
+        category: '',
+        price: '',
+        ratting: 0
+      }
     }
   },
   components: {

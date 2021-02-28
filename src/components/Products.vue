@@ -8,6 +8,12 @@
         <div class="col-lg-3 product" v-for="product in filteredProducts" v-bind:key="product.id">
           <a href="#">{{product.name}}</a>
           <img class="laptop-img" src="../assets/image/laptop.jpg" alt="">
+          <p>{{product.price | priceVn }}</p>
+          <div>
+            <h2>Star Rating</h2>
+            <div v-html="rating(product.Rating)">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -24,6 +30,20 @@ export default {
     return {
       products: JSON.parse(localStorage.getItem('laptop')),
       filterProducts: ''
+    }
+  },
+  methods: {
+    rating: (value) => {
+      let html = ''
+      for (let i = 0; i < value; i++) {
+        html = html + '<span class="fa fa-star" style="color: orange"></span>'
+      }
+
+      for (let i = 0; i < 5 - value; i++) {
+        html = html + '<span class="fa fa-star"></span>'
+      }
+
+      return html
     }
   }
 }
