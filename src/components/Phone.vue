@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-info">
-      <h1>Phone {{filter.name}}</h1>
+      <h1>Phone</h1>
     </div>
     <div class="container">
       <div class="row">
@@ -31,7 +31,24 @@ export default {
   data () {
     return {
       products: JSON.parse(localStorage.getItem('phone')),
-      filterProducts: ''
+      filterProductsName: this.filter.name,
+      filterProductsCategory: this.filter.category,
+      filterProductsPrice: this.filter.price,
+      filterProductsRatting: this.filter.ratting
+    }
+  },
+  watch: {
+    'filter.name': function (newValue) {
+      this.filterProductsName = newValue
+    },
+    'filter.category': function (newValue) {
+      this.filterProductsCategory = newValue
+    },
+    'filter.price': function (newValue) {
+      this.filterProductsPrice = newValue
+    },
+    'filter.ratting': function (newValue) {
+      this.filterProductsRatting = newValue
     }
   },
   methods: {

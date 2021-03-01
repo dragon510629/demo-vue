@@ -3,14 +3,14 @@
     <div class="logo">
       <img src="../assets/image/lisa.jpg" alt="">
     </div>
-    <FilterShop :filter = "filter"></FilterShop>
+    <FilterShop :filter = "filter" @update-search="updateSearch"></FilterShop>
     <Products :filter = "filter"></Products>
     <Phone :filter="filter"></Phone>
   </div>
 </template>
 
 <script>
-import Products from './Products'
+import Products from './Laptop'
 import FilterShop from './FilterShop'
 import Phone from './Phone'
 
@@ -21,7 +21,7 @@ export default {
       filter: {
         name: '',
         category: '',
-        price: '',
+        price: 0,
         ratting: 0
       }
     }
@@ -30,6 +30,11 @@ export default {
     Products,
     FilterShop: FilterShop,
     Phone
+  },
+  methods: {
+    updateSearch (e) {
+      this.filter = e
+    }
   }
 }
 </script>

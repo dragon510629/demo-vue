@@ -1,47 +1,30 @@
 <template>
   <div>
     <div class="container filter-box">
-      <input class="search-input" placeholder="Nhập từ khoá cần tìm" role="searchbox" aria-label="Search" value="">
+      <input class="search-input" placeholder="Nhập từ khoá cần tìm" role="searchbox" aria-label="Search" v-model="searchName" @click="search">
       <button class="btn btn-info" @click="search">
         Search
       </button>
       <button class="btn btn-outline-info" @click="isActive = !isActive">
         Filter
       </button>
+      <button class="btn btn-outline-info" @click="clearFilter">
+        Clear Filter
+      </button>
     </div>
     <table class="table" :class="{ 'active': isActive }">
-      <thead>
-      <tr>
-        <th scope="col">Category</th>
-        <th scope="col">Price</th>
-        <th scope="col">Rating</th>
-      </tr>
-      </thead>
       <tbody>
           <tr>
-            <td><button class="btn btn-info">Dell</button></td>
-            <td><button class="btn btn-info">Iphone</button></td>
-            <td><button class="btn btn-info">Iphone</button></td>
+            <td >Category</td>
+            <td v-for="element in filterData.category" :key="element.id"><button class="btn btn-info" @click="addSearchCategory(element.keySearch)">{{ element.keySearch }}</button></td>
           </tr>
           <tr>
-            <td><button class="btn btn-info">Iphone</button></td>
-            <td><button class="btn btn-info">Thornton</button></td>
-            <td><button class="btn btn-info">2</button></td>
+            <td >Price</td>
+            <td v-for="element in filterData.price" :key="element.id"><button class="btn btn-info" @click="addSearchPrice(element.keySearch)">{{ element.keySearch }}</button></td>
           </tr>
           <tr>
-            <td><button class="btn btn-info">MSI</button></td>
-            <td><button class="btn btn-info">Thornton</button></td>
-            <td><button class="btn btn-info">3</button></td>
-          </tr>
-          <tr>
-            <td><button class="btn btn-info">Hp</button></td>
-            <td><button class="btn btn-info">Thornton</button></td>
-            <td><button class="btn btn-info">4</button></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><button class="btn btn-info">5</button></td>
+            <td >Rating</td>
+            <td v-for="element in filterData.rating" :key="element.id"><button class="btn btn-info" @click="addSearchRating(element.value)">{{ element.value }}</button></td>
           </tr>
       </tbody>
     </table>
@@ -49,17 +32,37 @@
 </template>
 
 <script>
+import { filterData } from '../data/Filter'
+
 export default {
   name: 'FilterShop',
   props: ['filter'],
   data () {
     return {
-      isActive: false
+      isActive: false,
+      searchName: '',
+      filterData
     }
   },
   methods: {
+    addSearchCategory (e) {
+      this.filter.category = e
+    },
+    addSearchPrice (e) {
+      this.filter.price = e
+    },
+    addSearchRating (e) {
+      this.filter.ratting = e
+    },
     search () {
-      console.log(this.filter)
+      this.filter.name = this.searchName
+      this.$emit('update-search', this.filter)
+    },
+    clearFilter () {
+      this.filter.name = ''
+      this.filter.category = ''
+      this.filter.price = 0
+      this.filter.ratting = 0
     }
   }
 }

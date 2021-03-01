@@ -25,11 +25,29 @@ import { productsMixin } from '../productMixin'
 
 export default {
   name: 'Product',
+  props: ['filter'],
   mixins: [productsMixin],
   data () {
     return {
       products: JSON.parse(localStorage.getItem('laptop')),
-      filterProducts: ''
+      filterProductsName: this.filter.name,
+      filterProductsCategory: this.filter.category,
+      filterProductsPrice: this.filter.price,
+      filterProductsRatting: this.filter.ratting
+    }
+  },
+  watch: {
+    'filter.name': function (newValue) {
+      this.filterProductsName = newValue
+    },
+    'filter.category': function (newValue) {
+      this.filterProductsCategory = newValue
+    },
+    'filter.price': function (newValue) {
+      this.filterProductsPrice = newValue
+    },
+    'filter.ratting': function (newValue) {
+      this.filterProductsRatting = newValue
     }
   },
   methods: {
