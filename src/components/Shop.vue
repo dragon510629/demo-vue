@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="logo">
-      <img src="../assets/image/lisa.jpg" alt="">
+      <img src="../assets/image/NAPC-C1-so-luoc-ve-nhiep-anh-phong-canh-scaled.jpg" alt="">
     </div>
     <FilterShop :filter = "filter" @update-search="updateSearch"></FilterShop>
     <Products :filter = "filter"></Products>
