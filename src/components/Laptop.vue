@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-info">
-      <h1>Laptopppppp</h1>
+      <h1>Laptop</h1>
     </div>
     <div class="container">
       <div class="row">
